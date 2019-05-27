@@ -4,7 +4,8 @@ const {
     GraphQLString,
     GraphQLSchema,
     GraphQLID,
-    GraphQLInt
+    GraphQLInt,
+    GraphQLList
 } = graphql;
 const _ = require('lodash');
 
@@ -45,6 +46,8 @@ const authors = [
 //defining a type and what to return
 const BookType = new GraphQLObjectType({
     name: 'Book',
+    //when wrapping in fx, it's not executing the function until it's called.
+    //otherwise, it'll have lexical error
     fields: () => ({
         id: { type: GraphQLID },
         name: { type: GraphQLString },
@@ -63,7 +66,13 @@ const AuthorType = new GraphQLObjectType({
     fields: () => ({
         id: { type: GraphQLID },
         name: { type: GraphQLString },
-        age: { type: GraphQLInt }
+        age: { type: GraphQLInt },
+        books: {
+            type: new GraphQLList(BookType),
+            resolve(parent, args) {
+                return _.filter(books, { authorId: parent.id });
+            }
+        }
     })
 });
 
