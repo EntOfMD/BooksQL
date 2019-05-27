@@ -13,9 +13,11 @@ mongoose.connect(
     },
     err => {
         if (err) throw err;
-        console.log(`Database is online & connected`);
     }
 );
+mongoose.connection.once('open', () => {
+    console.log(`Database is online & connected`);
+});
 
 app.use(routes);
 
