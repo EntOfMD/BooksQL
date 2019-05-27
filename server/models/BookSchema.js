@@ -10,16 +10,36 @@ const _ = require('lodash');
 
 //dummy data
 const books = [
-    { name: 'book 1', genre: 'xxx', id: '1', authorId: '1' },
-    { name: 'book 2', genre: 'yyy', id: '2', authorId: '2' },
-    { name: 'book 3', genre: 'zzz', id: '3', authorId: '3' },
-    { name: 'book 4', genre: 'xxx', id: '4 ', authorId: '1' }
+    {
+        name: 'The Silmarillion',
+        genre: 'Fastasy',
+        id: '1',
+        authorId: '1'
+    },
+    {
+        name: 'A Game of Thrones (A Song of Ice and Fire, Book 1)',
+        genre: 'Fantasy',
+        id: '2',
+        authorId: '2'
+    },
+    {
+        name: 'Harry Potter and the Chamber of Secrets',
+        genre: 'Fantasy',
+        id: '3',
+        authorId: '3'
+    },
+    {
+        name: 'The Lord of the Rings',
+        genre: 'Fantasy',
+        id: '4 ',
+        authorId: '1'
+    }
 ];
 
 const authors = [
-    { name: 'Author 1', age: 22, id: '1' },
-    { name: 'Author 3', age: 24, id: '2' },
-    { name: 'Author 2', age: 25, id: '3' }
+    { name: 'J.R.R Tolkien', age: 81, id: '1' },
+    { name: 'George R. R. Martin', age: 70, id: '2' },
+    { name: 'J.K. Rowling', age: 53, id: '3' }
 ];
 
 //defining a type and what to return
