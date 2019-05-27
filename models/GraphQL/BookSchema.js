@@ -9,39 +9,7 @@ const {
 } = graphql;
 const _ = require('lodash');
 
-//dummy data
-const books = [
-    {
-        name: 'The Silmarillion',
-        genre: 'Fastasy',
-        id: '1',
-        authorId: '1'
-    },
-    {
-        name: 'A Game of Thrones (A Song of Ice and Fire, Book 1)',
-        genre: 'Fantasy',
-        id: '2',
-        authorId: '2'
-    },
-    {
-        name: 'Harry Potter and the Chamber of Secrets',
-        genre: 'Fantasy',
-        id: '3',
-        authorId: '3'
-    },
-    {
-        name: 'The Lord of the Rings',
-        genre: 'Fantasy',
-        id: '4 ',
-        authorId: '1'
-    }
-];
-
-const authors = [
-    { name: 'J.R.R Tolkien', age: 81, id: '1' },
-    { name: 'George R. R. Martin', age: 70, id: '2' },
-    { name: 'J.K. Rowling', age: 53, id: '3' }
-];
+const { Book, Author } = require('../index');
 
 //defining a type and what to return
 const BookType = new GraphQLObjectType({
@@ -55,7 +23,7 @@ const BookType = new GraphQLObjectType({
         author: {
             type: AuthorType,
             resolve(parent, args) {
-                return _.find(authors, { id: parent.authorId });
+                // return _.find(authors, { id: parent.authorId });
             }
         }
     })
@@ -70,7 +38,7 @@ const AuthorType = new GraphQLObjectType({
         books: {
             type: new GraphQLList(BookType),
             resolve(parent, args) {
-                return _.filter(books, { authorId: parent.id });
+                // return _.filter(books, { authorId: parent.id });
             }
         }
     })
@@ -87,7 +55,7 @@ const RootQuery = new GraphQLObjectType({
             args: { id: { type: GraphQLID } }, //adding ID as a param so we can grab individuals
             resolve(parent, args) {
                 //code to get data from db/other source
-                return _.find(books, { id: args.id });
+                // return _.find(books, { id: args.id });
             }
         },
         author: {
@@ -95,7 +63,7 @@ const RootQuery = new GraphQLObjectType({
             args: { id: { type: GraphQLID } }, //adding ID as a param so we can grab individuals
             resolve(parent, args) {
                 //code to get data from db/other source
-                return _.find(authors, { id: args.id });
+                // return _.find(authors, { id: args.id });
             }
         },
         books: {
