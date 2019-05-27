@@ -9,7 +9,7 @@ const {
 } = graphql;
 const _ = require('lodash');
 
-const { Book, Author } = require('../index');
+const Author = require('../author');
 
 //defining a type and what to return
 const BookType = new GraphQLObjectType({
@@ -81,7 +81,28 @@ const RootQuery = new GraphQLObjectType({
     }
 });
 
+const Mutation = new GraphQLObjectType({
+    name: 'Mutation',
+    fields: {
+        addAuthor: {
+            type: AuthorType,
+            args: {
+                name: { type: GraphQLString },
+                age: { type: GraphQLInt }
+            },
+            resolve(parent, args) {
+                let author = new Author({
+                    name: args.name,
+                    age: args.age
+                });
+                return author.save();
+            }
+        }
+    }
+});
+
 //defining which query we're allowing user to use when they're making from the front-end
 module.exports = new GraphQLSchema({
-    query: RootQuery
+    query: RootQuery,
+    mutation: Mutation
 });
